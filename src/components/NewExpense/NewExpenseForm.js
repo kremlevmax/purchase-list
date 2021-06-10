@@ -28,12 +28,33 @@ const NewExpenseForm = (props) => {
         new Date(date).getTime() + new Date(date).getTimezoneOffset() * 60000
       ),
     };
+    setIsShown((isShown) => (isShown = !isShown));
     setTitle("");
     setAmount("");
     setDate("");
 
     props.onSubmit(formData);
   };
+
+  const [isShown, setIsShown] = useState(false);
+
+  const buttonSubmitHandller = (event) => {
+    event.preventDefault();
+    setIsShown((isShown) => (isShown = !isShown));
+    setTitle("");
+    setAmount("");
+    setDate("");
+  };
+
+  console.log(isShown);
+
+  if (!isShown) {
+    return (
+      <button type='submit' onClick={buttonSubmitHandller}>
+        Create a New Expense
+      </button>
+    );
+  }
 
   return (
     <form onSubmit={submitHandler}>
@@ -64,6 +85,9 @@ const NewExpenseForm = (props) => {
         </div>
       </div>
       <div className='new-expense__actions'>
+        <button type='submit' onClick={buttonSubmitHandller}>
+          Cancel
+        </button>
         <button type='submit'>Send</button>
       </div>
     </form>
