@@ -1,23 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { React, useState } from "react";
+import Expenses from "./components/Expenses/Expenses";
+import NewExpense from "./components/NewExpense/NewExpense";
+
+const DATA_ARRAY = [
+  {
+    id: "0001",
+    title: "New Balance sneakers",
+    price: "99",
+    date: new Date(2021, 3, 8),
+  },
+  {
+    id: "0002",
+    title: "Levis Jacket",
+    price: "79",
+    date: new Date(2021, 2, 23),
+  },
+  {
+    id: "0004",
+    title: "Eastpak Backpack",
+    price: "65",
+    date: new Date(2021, 1, 12),
+  },
+  {
+    id: "0005",
+    title: "Adidas Tracksuit",
+    price: "139",
+    date: new Date(2021, 4, 1),
+  },
+];
 
 function App() {
+  const [data, setData] = useState(DATA_ARRAY);
+
+  const onSubmitFormData = (formData) => {
+    setData((prevState) => {
+      return [formData, ...prevState];
+    });
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <NewExpense onSubmitFormData={onSubmitFormData} />
+      <Expenses expensesData={data} />
     </div>
   );
 }
