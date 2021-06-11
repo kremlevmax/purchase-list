@@ -18,6 +18,13 @@ const NewExpenseForm = (props) => {
     setDate(currentDate);
   };
 
+  const zeroOutAndChangeVisibilityForm = () => {
+    setIsShown((isShown) => (isShown = !isShown));
+    setTitle("");
+    setAmount("");
+    setDate("");
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -28,11 +35,7 @@ const NewExpenseForm = (props) => {
         new Date(date).getTime() + new Date(date).getTimezoneOffset() * 60000
       ),
     };
-    setIsShown((isShown) => (isShown = !isShown));
-    setTitle("");
-    setAmount("");
-    setDate("");
-
+    zeroOutAndChangeVisibilityForm();
     props.onSubmit(formData);
   };
 
@@ -40,13 +43,8 @@ const NewExpenseForm = (props) => {
 
   const buttonSubmitHandller = (event) => {
     event.preventDefault();
-    setIsShown((isShown) => (isShown = !isShown));
-    setTitle("");
-    setAmount("");
-    setDate("");
+    zeroOutAndChangeVisibilityForm();
   };
-
-  console.log(isShown);
 
   if (!isShown) {
     return (

@@ -1,6 +1,7 @@
 import { React, useState } from "react";
 import Expenses from "./components/Expenses/Expenses";
 import NewExpense from "./components/NewExpense/NewExpense";
+import Bars from "./components/Bars/Bars";
 
 const DATA_ARRAY = [
   {
